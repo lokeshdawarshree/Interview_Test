@@ -1,6 +1,16 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
-public class ToughJetRequest {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
+import com.travix.medusa.busyflights.factory.AirlineSupplierRequest;
+
+/*
+ * 
+ * Client Request Class is implemented with new interface and have similar method of setRequest.
+   Which map BusyRequest to respective Supplier Request.
+
+*
+*/
+public class ToughJetRequest implements AirlineSupplierRequest{
 
     private String from;
     private String to;
@@ -47,4 +57,13 @@ public class ToughJetRequest {
     public void setNumberOfAdults(final int numberOfAdults) {
         this.numberOfAdults = numberOfAdults;
     }
+    @Override
+	public void setRequest(BusyFlightsRequest busyFlightsRequest) {
+		this.setFrom(busyFlightsRequest.getOrigin());
+		this.setTo(busyFlightsRequest.getDestination());
+		this.setOutboundDate(busyFlightsRequest.getDepartureDate());
+		this.setInboundDate(busyFlightsRequest.getReturnDate());
+		this.setNumberOfAdults(busyFlightsRequest.getNumberOfPassengers());
+		
+	}
 }

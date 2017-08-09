@@ -1,6 +1,16 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
-public class CrazyAirRequest {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
+import com.travix.medusa.busyflights.factory.AirlineSupplierRequest;
+
+/*
+ * 
+ * Client Request Class is implemented with new interface and have similar method of setRequest.
+   Which map BusyRequest to respective Supplier Request.
+
+*
+*/
+public class CrazyAirRequest implements AirlineSupplierRequest{
 
     private String origin;
     private String destination;
@@ -47,4 +57,13 @@ public class CrazyAirRequest {
     public void setPassengerCount(final int passengerCount) {
         this.passengerCount = passengerCount;
     }
+    @Override
+	public void setRequest(BusyFlightsRequest busyFlightsRequest) {
+		this.setOrigin(busyFlightsRequest.getOrigin());
+		this.setDestination(busyFlightsRequest.getDestination());
+		this.setDepartureDate(busyFlightsRequest.getDepartureDate());
+		this.setReturnDate(busyFlightsRequest.getReturnDate());
+		this.setPassengerCount(busyFlightsRequest.getNumberOfPassengers());
+		
+	}
 }

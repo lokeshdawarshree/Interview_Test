@@ -1,6 +1,16 @@
 package com.travix.medusa.busyflights.domain.toughjet;
 
-public class ToughJetResponse {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.factory.AirlineSupplierResponse;
+
+/*
+ * 
+ * Client Response Class is implemented with new interface and have similar method of getResponse.
+Which map respective Supplier Response to BusyFlightResponse
+
+*
+*/
+public class ToughJetResponse implements AirlineSupplierResponse{
 
     private String carrier;
     private double basePrice;
@@ -74,4 +84,18 @@ public class ToughJetResponse {
     public void setInboundDateTime(final String inboundDateTime) {
         this.inboundDateTime = inboundDateTime;
     }
+
+    // new method in class to map both response 
+    @Override
+	public BusyFlightsResponse getResponse() {
+		BusyFlightsResponse busyFlightsResponse = new BusyFlightsResponse();
+		busyFlightsResponse.setAirline(this.getCarrier());
+		busyFlightsResponse.setSupplier("Tough Jet");
+		busyFlightsResponse.setFare((this.getBasePrice() +this.getTax()) - (this.getDiscount()/100)* (this.getBasePrice()));
+		busyFlightsResponse.setDepartureAirportCode(this.getDepartureAirportName());
+		busyFlightsResponse.setDestinationAirportCode(this.getArrivalAirportName());
+		busyFlightsResponse.setDepartureDate(this.getOutboundDateTime());
+		busyFlightsResponse.setArrivalDate(this.getInboundDateTime());
+		return null;
+	}
 }

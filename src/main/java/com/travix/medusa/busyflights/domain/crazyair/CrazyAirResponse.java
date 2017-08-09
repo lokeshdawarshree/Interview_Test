@@ -1,6 +1,16 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
-public class CrazyAirResponse {
+import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.factory.AirlineSupplierResponse;
+
+/*
+ * 
+ * Client Response Class is implemented with new interface and have similar method of getResponse.
+Which map respective Supplier Response to BusyFlightResponse
+
+*
+*/
+public class CrazyAirResponse implements AirlineSupplierResponse{
 
     private String airline;
     private double price;
@@ -65,4 +75,18 @@ public class CrazyAirResponse {
     public void setArrivalDate(final String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
+   
+    // new method in class to map both response 
+    @Override
+	public BusyFlightsResponse getResponse() {
+		BusyFlightsResponse busyFlightsResponse = new BusyFlightsResponse();
+		busyFlightsResponse.setAirline(this.getAirline());
+		busyFlightsResponse.setSupplier("Crazy Air");
+		busyFlightsResponse.setFare(this.getPrice());
+		busyFlightsResponse.setDepartureAirportCode(this.getDepartureAirportCode());
+		busyFlightsResponse.setDestinationAirportCode(this.getDestinationAirportCode());
+		busyFlightsResponse.setDepartureDate(this.getDepartureDate());
+		busyFlightsResponse.setArrivalDate(this.getArrivalDate());
+		return null;
+	}
 }
